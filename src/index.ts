@@ -73,7 +73,7 @@ const getCompletionItems = async (): Promise<CompleteResult> => {
     items: [
       ...versionsCache[packageName].reverse().map((version) => ({
         word: version,
-        menu: '[npm-version]',
+        menu: '[npm]',
       })),
     ],
     startcol: startCol,
