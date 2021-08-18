@@ -71,7 +71,7 @@ const getCompletionItems = async (): Promise<CompleteResult> => {
 
   return {
     items: [
-      ...versionsCache[packageName].map((version) => ({
+      ...versionsCache[packageName].reverse().map((version) => ({
         word: version,
         menu: '[npm-version]',
       })),
