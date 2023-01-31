@@ -1,5 +1,5 @@
-import { execSync } from "child_process";
-import { CompleteResult, ExtensionContext, sources, workspace } from "coc.nvim";
+import { execSync } from 'child_process';
+import { CompleteResult, ExtensionContext, sources, workspace } from 'coc.nvim';
 
 type VersionsCache = {
   [packageName: string]: Array<string>;
@@ -10,18 +10,18 @@ const versionsCache: VersionsCache = {};
 export const activate = async (context: ExtensionContext): Promise<void> => {
   context.subscriptions.push(
     sources.createSource({
-      name: "npm",
+      name: 'npm',
       doComplete: async () => {
         const items = await getCompletionItems();
         return items;
       },
-    }),
+    })
   );
 };
 
 const getCompletionItems = async (): Promise<CompleteResult> => {
-  const fileName = await workspace.nvim.call("expand", ["%:t"]);
-  if (fileName !== "package.json") {
+  const fileName = await workspace.nvim.call('expand', ['%:t']);
+  if (fileName !== 'package.json') {
     return { items: [] };
   }
 
@@ -46,7 +46,7 @@ const getCompletionItems = async (): Promise<CompleteResult> => {
 
   if (versionsCache[packageName] == null) {
     const stdout = execSync(`yarn --silent info --json ${packageName}`, {
-      encoding: "utf-8",
+      encoding: 'utf-8',
     });
     const versions = JSON.parse(stdout).data.versions as Array<string>;
 
